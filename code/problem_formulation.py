@@ -1,30 +1,27 @@
 import random
 from collections import deque
 
-grid_size = 3
+grid_size = 5
 initial_state = (0, 0)
-goal_state = (2, 2)
-num_of_obstacle = 2
+goal_state = (4,4)
+num_of_obstacle = 5  
 
 def create_grid():
-    
     grid = []
     for _ in range(grid_size):
         row = []
-        
         for _ in range(grid_size):
             row.append("_")
         grid.append(row)
-        
-    grid[0][0] = "S"
-    grid[2][2] = "G"  
+    grid[initial_state[0]][initial_state[1]] = "S"  # Start
+    grid[goal_state[0]][goal_state[1]] = "G"        # Goal
     return grid
 
 def place_obstacles(grid):
     obstacles = 0
     while obstacles < num_of_obstacle:
-        x= random.randint(0, grid_size - 1)
-        y= random.randint(0, grid_size - 1)
+        x = random.randint(0, grid_size - 1)
+        y = random.randint(0, grid_size - 1)
         
         if (x, y) not in [initial_state, goal_state] and grid[x][y] == "_":
             grid[x][y] = "X"
@@ -57,7 +54,6 @@ def print_grid_with_path(grid, path=[]):
     display_grid = []
     for row in grid:
         new_row = []
-        
         for cell in row:
             new_row.append(symbols[cell])
         display_grid.append(new_row)
@@ -78,5 +74,3 @@ def generate_valid_grid():
         
         if has_path(grid):
             return grid
-
-
