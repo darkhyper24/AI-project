@@ -13,8 +13,8 @@ def create_grid():
         for _ in range(grid_size):
             row.append("_")
         grid.append(row)
-    grid[initial_state[0]][initial_state[1]] = "S"  # Start
-    grid[goal_state[0]][goal_state[1]] = "G"        # Goal
+    grid[0][0] = "S"  # Start
+    grid[4][4] = "G"        # Goal
     return grid
 
 def place_obstacles(grid):
