@@ -1,6 +1,6 @@
 import heapq
 from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path
-
+from ids import print_final_path
 # uniform Cost Search function
 def ucs_search(grid):
     # Priority queue for frontier (cost, position, path)
@@ -21,10 +21,11 @@ def ucs_search(grid):
 
         # Check if goal state is reached
         if position == goal_state:
-            print("\nPath to goal found")
+            print("\nPath to goal found\n")
             # print_grid_with_path(grid, path)
             print("Path taken:", path)
             print("Total cost:", cost)
+            print("\n")
             return path
 
         # Explore (up, down, left, right)
@@ -39,5 +40,9 @@ def ucs_search(grid):
                     # cost is 1 for each step
                     heapq.heappush(frontier, (cost + 1, next_position, path))
 
-    print("No path to goal exists.")
     return None
+
+def ucs_algorithm(grid):
+    path = ucs_search(grid)
+    print("path to goal:\n")
+    print_final_path(grid,path)
