@@ -1,7 +1,7 @@
 import heapq
 from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path
 
-# Uniform Cost Search function
+# uniform Cost Search function
 def ucs_search(grid):
     # Priority queue for frontier (cost, position, path)
     frontier = [(0, initial_state, [])]
