@@ -7,18 +7,24 @@ goal_state = (4,4)
 num_of_obstacle = 5  
 
 def create_grid():
+    
     grid = []
+    
     for _ in range(grid_size):
         row = []
         for _ in range(grid_size):
             row.append("_")
         grid.append(row)
-    grid[0][0] = "S"  # Start
-    grid[4][4] = "G"        # Goal
+        
+    grid[0][0] = "S" 
+    grid[grid_size-1][grid_size-1] = "G"
+           
     return grid
 
 def place_obstacles(grid):
+    
     obstacles = 0
+    
     while obstacles < num_of_obstacle:
         x = random.randint(0, grid_size - 1)
         y = random.randint(0, grid_size - 1)
@@ -47,8 +53,7 @@ def has_path(grid):
                     visited.add((next_x, next_y))
                     queue.append((next_x, next_y))
     return False
-
-# Print the grid with obstacles and path markings
+#x for obstacles s for start g for goal _ for free cells
 def print_grid_with_path(grid, path=[]):
     symbols = {"_": "_", "X": "X", "S": "S", "G": "G"}
     display_grid = []
@@ -64,7 +69,7 @@ def print_grid_with_path(grid, path=[]):
     
     for row in display_grid:
         print(" ".join(row))
-    print()
+    print("\n")
 
 # Generate a valid grid with obstacles and ensure path existence
 def generate_valid_grid():
