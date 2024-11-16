@@ -33,7 +33,10 @@ def place_obstacles(grid):
             grid[x][y] = "X"
             obstacles += 1
 
-# Check if there is a path from start to goal using BFS
+
+
+
+
 def has_path(grid):
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     queue = deque([initial_state])
@@ -53,7 +56,11 @@ def has_path(grid):
                     visited.add((next_x, next_y))
                     queue.append((next_x, next_y))
     return False
-#x for obstacles s for start g for goal _ for free cells
+
+
+
+
+
 def print_grid_with_path(grid, path=[]):
     symbols = {"_": "_", "X": "X", "S": "S", "G": "G"}
     display_grid = []
@@ -71,7 +78,8 @@ def print_grid_with_path(grid, path=[]):
         print(" ".join(row))
     print("\n")
 
-# Generate a valid grid with obstacles and ensure path existence
+
+
 def generate_valid_grid():
     while True:
         grid = create_grid()
@@ -84,6 +92,7 @@ def calculate_cost(path):
     return len(path)-1
 
         
+       
         
 def print_final_path(grid, path):
     display_grid = []

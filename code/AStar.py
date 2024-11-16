@@ -2,13 +2,19 @@ from problem_formulation import grid_size, initial_state, goal_state, print_grid
 import time
 from heapq import heappop, heappush
 from ids import print_final_path
+
+
+
 def manhattan_distance(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+
 
 def printallnodesheuristic(goal):
     for i in range(grid_size):
         for j in range(grid_size):
             print(f"Manhattan distance from ({i}, {j}) to goal is {manhattan_distance((i, j), goal)}")
+
 
 
 def a_star_search(grid):
@@ -48,6 +54,7 @@ def a_star_search(grid):
                     heappush(frontier, (f_next, g_next, next_position, path))
 
     return None
+
 
 
 def AStar_algorithm(grid):
