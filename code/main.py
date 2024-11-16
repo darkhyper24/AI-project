@@ -37,16 +37,22 @@ def print_all_performances(all_performances):
         "Uniform Cost Search (UCS)",
         "Greedy Best First (Euclidean)",
         "Greedy Best First (Manhattan)",
-        "A* Search" ,
+        "A* Search",
         "Simulated Annealing"
-
     ]
     
     for i, performance in enumerate(all_performances):
         path, total_time, total_cost = performance
-        table_data.append([algorithms[i], path, round(total_time, 4), total_cost])
+        
+        if path is None:
+            path_str = "No Path Found"
+        else:
+
+            path_str = "\n".join([str(path[j:j+5]) for j in range(0, len(path), 5)])
+        table_data.append([algorithms[i], path_str, round(total_time, 4) if total_time else "N/A", total_cost if total_cost else "N/A"])
+    
     print("\nAlgorithm Performance Table:")
-    print(tabulate(table_data, headers=headers, tablefmt="grid"))
+    print(tabulate(table_data, headers=headers, tablefmt="grid", maxcolwidths=[20, 50, 20, 15]))
 
 
 print_all_performances(all_performances)
