@@ -1,14 +1,13 @@
 import heapq
-from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path
-from ids import print_final_path
-# uniform Cost Search function
+from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path,calculate_cost,print_final_path
+import time
 def ucs_search(grid):
-    # Priority queue for frontier (cost, position, path)
+
     frontier = [(0, initial_state, [])]
     visited = set()
 
     while frontier:
-        # lowest cost
+
         cost, position, path = heapq.heappop(frontier)
         x, y = position
 
@@ -16,19 +15,16 @@ def ucs_search(grid):
             continue
 
         visited.add(position)
-        path = path + [position]  
+        path = path + [position]
         print_grid_with_path(grid, path)
 
-        # Check if goal state is reached
+
         if position == goal_state:
             print("\nPath to goal found\n")
-            # print_grid_with_path(grid, path)
-            print("Path taken:", path)
-            print("Total cost:", cost)
-            print("\n")
+
             return path
 
-        # Explore (up, down, left, right)
+
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         for delta_x, delta_y in directions:
             next_x = x + delta_x
@@ -37,12 +33,19 @@ def ucs_search(grid):
 
             if 0 <= next_x < grid_size and 0 <= next_y < grid_size:
                 if next_position not in visited and grid[next_x][next_y] != "X":
-                    # cost is 1 for each step
+
                     heapq.heappush(frontier, (cost + 1, next_position, path))
 
     return None
 
 def ucs_algorithm(grid):
+    start_time=time.time()
     path = ucs_search(grid)
-    print("path to goal:\n")
+    end_time=time.time()
+    total_time=end_time-start_time
+    total_cost=calculate_cost(path)
+    print("final path to goal:\n")
     print_final_path(grid,path)
+    print(f"time taken for ucs to reach goal is: {total_time}")
+    print(f"path cost is: {total_cost}")
+    return path,total_time,total_cost
