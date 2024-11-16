@@ -79,3 +79,25 @@ def generate_valid_grid():
         
         if has_path(grid):
             return grid
+
+def calculate_cost(path):
+    return len(path)-1
+
+        
+        
+def print_final_path(grid, path):
+    display_grid = []
+    for row in grid:
+        new_row = []
+        
+        for cell in row:
+            new_row.append(cell)
+        display_grid.append(new_row)
+
+    for (x, y) in path:
+        if display_grid[x][y] == "_":
+            display_grid[x][y] = "P"
+    
+    for row in display_grid:
+        print(" ".join(row))
+    print("\n")

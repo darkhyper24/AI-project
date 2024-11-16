@@ -1,4 +1,4 @@
-from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path
+from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path,calculate_cost,print_final_path
 import time
 from heapq import heappop, heappush
 
@@ -16,7 +16,6 @@ def greedy_best_first(grid,start,goal):
     explored = set()
     heuristic = manhattan_distance(start, goal)
     frontier = [(heuristic, start, [start])]
-    max_frontier_size = 1
 
     while frontier:
         _, node, path = heappop(frontier)
@@ -36,9 +35,6 @@ def greedy_best_first(grid,start,goal):
                 explored.add(neighbor)
                 new_path = path + [neighbor]
                 heappush(frontier, (neighbor_heuristic, neighbor, new_path))
-                max_frontier_size = max(max_frontier_size, len(frontier))
-
-
                 print(f"Exploring {neighbor} with heuristic {neighbor_heuristic}")
                 print_grid_with_path(grid, new_path)
                 if neighbor == goal:
@@ -53,25 +49,11 @@ def greedy_best_first_manhattan_algorithm(grid, start, goal):
         path = greedy_best_first(grid, start, goal)
         if path:
             end_time=time.time()
+            total_time = end_time-start_time
+            total_cost = calculate_cost(path)
             print("\nPath to goal found:")
             print_final_path(grid, path)
             print("Path taken:", path)
-            print(f"time taken for the greedy best first search algorithm to search for the goal is:{end_time-start_time} seconds")
-            return path
-
-def print_final_path(grid, path):
-    display_grid = []
-    for row in grid:
-        new_row = []
-        
-        for cell in row:
-            new_row.append(cell)
-        display_grid.append(new_row)
-
-    for (x, y) in path:
-        if display_grid[x][y] == "_":
-            display_grid[x][y] = "P"
-    
-    for row in display_grid:
-        print(" ".join(row))
-    print("\n")
+            print(f"time taken for the greedy best first search algorithm to search for the goal is:{total_time} seconds")
+            print(f"the cost is : {total_cost}")
+            return path, total_time, total_cost
