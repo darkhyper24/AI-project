@@ -5,7 +5,7 @@ from ids import print_final_path
 
 def bfs_search(grid, start, goal):
 
-    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  # Up, Down, Left, Right
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]  
     queue = deque([(start, [start])])
     visited = set()
     visited.add(start)
@@ -29,14 +29,14 @@ def bfs_algorithm(grid):
     start = initial_state
     goal = goal_state
 
-    print("Running BFS...")
+    print("running BFS")
     path = bfs_search(grid, start, goal)
     
     if path:
         print("Shortest Path Found:")
-        print_final_path(grid, path)  # Pass the grid and path for proper visualization
-        print_grid_with_path(grid, path)  # Visualize the path on the grid
+        print_final_path(grid, path)  
+        print_grid_with_path(grid, path)  
         return path
     else:
-        print("No path found!")
+        print("no path found")
         return None
