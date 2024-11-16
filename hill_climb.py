@@ -24,31 +24,28 @@ def hill_climb_search(grid, start, goal):
             print("\nNo more valid moves!")
             return None
 
-        # Choose the neighbor with the lowest heuristic value
         next_state = min(neighbors, key=lambda n: heuristic(n, goal))
 
-        # If no improvement is possible, terminate
         if heuristic(next_state, goal) >= heuristic(current, goal):
-            print("\nStuck at a local minimum!")
+            print("\n stuck at a local minimum")
             return None
 
         current = next_state
         path.append(current)
 
-        # Visualize the grid with the current path
         print_grid_with_path(grid, path)
 
-    print("\nPath to goal found!")
+    print("\n path to goal found")
     return path
 
 
 def hill_climb_algorithm(grid):
 
-    print("Running Hill Climbing Search...")
+    print("running hill climbing search")
     path = hill_climb_search(grid, initial_state, goal_state)
 
     if path:
-        print("Final Path Found:")
+        print("final path found is:")
         print_final_path(grid, path)
     else:
-        print("No path found!")
+        print("no path found")
