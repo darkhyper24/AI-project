@@ -1,4 +1,4 @@
-import heapq
+import heapq, time
 from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path
 
 # uniform Cost Search function
@@ -22,7 +22,6 @@ def ucs_search(grid):
         # Check if goal state is reached
         if position == goal_state:
             print("\nPath to goal found")
-            # print_grid_with_path(grid, path)
             print("Path taken:", path)
             print("Total cost:", cost)
             return path
@@ -41,3 +40,12 @@ def ucs_search(grid):
 
     print("No path to goal exists.")
     return None
+
+
+def ucs_algorithm(grid):
+    start_time=time.time()
+    path = ucs_search(grid)
+
+    if path:
+        end_time=time.time()
+        print(f"time taken for UCS Algorithm to find path: {end_time-start_time} seconds")
