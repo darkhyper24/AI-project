@@ -1,8 +1,7 @@
 import math
 import random
 import time
-from problem_formulation import initial_state, goal_state, print_grid_with_path
-from ids import print_final_path
+from problem_formulation import initial_state, goal_state, print_grid_with_path,calculate_cost,print_final_path
 
 def get_neighbors(grid, state):
     """
@@ -109,6 +108,13 @@ def SA_algorithm(grid):
 
     if path:
         end_time=time.time()
+        total_time = end_time-start_time
+        total_cost = calculate_cost(path)
         print("Path to goal found using Simulated Annealing:")
         print_final_path(grid, path)
-        print(f"time taken for simulated annealing to find path: {end_time-start_time} seconds")
+        print(f"time taken for simulated annealing to find path: {total_time} seconds")
+        print(f"the cost is : {total_cost}")
+        return path, total_time, total_cost
+    else:
+        print("Goal not reached.")
+        return path, 0, 0

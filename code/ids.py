@@ -1,4 +1,4 @@
-from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path
+from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path,calculate_cost,print_final_path
 import time
 
 
@@ -49,28 +49,13 @@ def ids_algorithm(grid, start, goal):
 
         if path:
             end_time=time.time()
+            total_time = end_time-start_time
+            total_cost = calculate_cost(path)
             print("\nPath to goal found:")
             print_final_path(grid, path)
             print("Path taken: ", path)
-            print(f"time taken for the ids algorithm to search for the goal is:{end_time-start_time} seconds")
-            return path
+            print(f"time taken for the ids algorithm to search for the goal is:{total_time} seconds")
+            print(f"the cost is : {total_cost}")
+            return path, total_time, total_cost
         depth += 1
         
-        
-        
-def print_final_path(grid, path):
-    display_grid = []
-    for row in grid:
-        new_row = []
-        
-        for cell in row:
-            new_row.append(cell)
-        display_grid.append(new_row)
-
-    for (x, y) in path:
-        if display_grid[x][y] == "_":
-            display_grid[x][y] = "P"
-    
-    for row in display_grid:
-        print(" ".join(row))
-    print("\n")
