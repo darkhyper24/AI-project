@@ -4,7 +4,7 @@ from collections import deque
 grid_size = 5
 initial_state = (0, 0)
 goal_state = (4,4)
-num_of_obstacle = 5  
+num_of_obstacle = 6  
 
 def create_grid():
     
