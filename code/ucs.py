@@ -1,6 +1,7 @@
 import heapq
 from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path,calculate_cost,print_final_path
 import time
+from visualisation import visualize_grid_path
 def ucs_search(grid):
 
     frontier = [(0, initial_state, [])]
@@ -48,4 +49,5 @@ def ucs_algorithm(grid):
     print_final_path(grid,path)
     print(f"time taken for ucs to reach goal is: {total_time}")
     print(f"path cost is: {total_cost}")
+    visualize_grid_path(grid, path, initial_state, goal_state, "UCS")
     return path,total_time,total_cost
