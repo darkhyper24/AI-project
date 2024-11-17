@@ -1,5 +1,5 @@
 import random, time
-from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path
+from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path,print_final_path
 
 
 def manhattan_distance(state1, state2):
@@ -76,17 +76,17 @@ def decode_genome(path):
         if 0 <= position[0] < grid_size and 0 <= position[1] < grid_size:
             decoded_path.append(position)
         else:
-            break  # Out of bounds
+            break  # Out of bound
 
     return decoded_path
 
-def genetic_algorithm(grid, population_size=10, generations=50):
+def genetic_algorithm(grid, population_size=10, generations=100):
     population = initialize_population(population_size)
 
     for generation in range(generations):
         fitnesses = [evaluate_path(individual, grid) for individual in population]
 
-        # Loops
+        # generations
         print(f"Generation {generation + 1}: Best fitness = {min(fitnesses)}")
 
         # Checkingif the goal is reached
@@ -95,7 +95,7 @@ def genetic_algorithm(grid, population_size=10, generations=50):
         if evaluate_path(best_individual, grid) == 0:
             print(f"Goal reached in generation {generation + 1}")
             decoded_path = decode_genome(best_individual)
-            print_grid_with_path(grid, decoded_path)
+            print_final_path(grid, decoded_path)
             return decoded_path
 
         # Selection
@@ -118,13 +118,23 @@ def genetic_algorithm(grid, population_size=10, generations=50):
     best_individual = population[best_index]
     decoded_path = decode_genome(best_individual)
     print_grid_with_path(grid, decoded_path)
-    return decoded_path
+    return None
 
+
+def calculate_cost(path):
+
+    return len(path)
 
 def Gen_algorithm(grid):
     start_time=time.time()
     path = genetic_algorithm(grid)
-
+    end_time=time.time()
+    total_time = end_time - start_time
     if path:
-        end_time=time.time()
-        print(f"time taken for Genetic Algorithm to find path: {end_time-start_time} seconds")
+        total_cost = calculate_cost(path)
+        print(f"time taken for Genetic to find path: {total_time} seconds\n")
+        print(f"the path cost is : {total_cost}\n")
+        return path, total_time, total_cost
+    else:
+        print(f"time taken for Genetic without finding path: {total_time} seconds\n")
+        return path, total_time, 0
