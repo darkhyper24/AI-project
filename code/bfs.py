@@ -47,7 +47,7 @@ def bfs_algorithm(grid):
         total_time = end_time-start_time
         total_cost = calculate_cost(path)
         print(f"the path cost is: {total_cost}")
-        print(f"time taken for the ids algorithm to search for the goal is:{total_time} seconds")
+        print(f"time taken for the bfs algorithm to search for the goal is:{total_time} seconds")
         print(f" Path taken: {path}")
         print_final_path(grid, path)
         return path, total_time, total_cost

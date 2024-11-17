@@ -56,6 +56,6 @@ def greedy_best_first_euclidean_algorithm(grid, start, goal):
             print("\nPath to goal found:")
             print_final_path(grid, path)
             print("Path taken:", path)
-            print(f"time taken for the greedy best first search algorithm to search for the goal is:{total_time} seconds")
+            print(f"time taken for the greedy best first search algorithm using euclidean to search for the goal is:{total_time} seconds")
             print(f"the cost is : {total_cost}")
             return path, total_time, total_cost
