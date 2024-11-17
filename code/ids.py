@@ -1,70 +1,55 @@
-from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path
+from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path, calculate_cost, print_final_path
+import time
 
-# Iterative Deepening Search function
-def ids_search(grid):
-    depth = 0
-    
-    while True:
-        print(f"\nTrying depth limit: {depth}")
-        visited = set()
-        path = ids_dfs(grid, initial_state, depth, visited, path=[])
-        
-        if path:
-            print("\nPath to goal found:")
-            print_final_path(grid, path)
-            print("Path taken:", path)
+
+def depth_limited_search(grid, start, goal, limit):
+    stack = [(start, 0, [])]  
+
+    while stack:
+        current, depth, path = stack.pop()
+
+        if depth > limit:
+            continue
+
+        path = path + [current]
+        print_grid_with_path(grid, path)
+
+        if current == goal:
             return path
-        depth += 1
 
-# Depth-Limited DFS helper for IDS that returns the path if goal is reached
-def ids_dfs(grid, position, limit, visited, path):
-    x, y = position
-    path.append(position)
+        x, y = current
+        directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-    if position == goal_state:
-        return path
-    
-    if limit <= 0:
-        path.pop()
-        return None
+        for delta_x, delta_y in directions:
+            next_x = x + delta_x
+            next_y = y + delta_y
+            next_position = (next_x, next_y)
 
-    visited.add(position)
-    print_grid_with_path(grid, path)
-    
-    # Explore neighbors (up, down, left, right)
-    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-    for delta_x, delta_y in directions:
-        next_x = x + delta_x
-        next_y = y + delta_y
-        next_position = (next_x, next_y)
-        
-        if 0 <= next_x < grid_size and 0 <= next_y < grid_size:
-            
-            if next_position not in visited and grid[next_x][next_y] != "X":
-                result = ids_dfs(grid, next_position, limit - 1, visited, path)
-                
-                if result:  # If the path is found, return it
-                    return result
+            if (0 <= next_x < grid_size and 0 <= next_y < grid_size and next_position not in path and grid[next_x][next_y] != "X"):
+                stack.append((next_position, depth + 1, path))
 
-    # Backtrack
-    path.pop()
-    visited.remove(position)
     return None
 
-# Print the final path taken to reach the goal
-def print_final_path(grid, path):
-    display_grid = []
-    for row in grid:
-        new_row = []
-        
-        for cell in row:
-            new_row.append(cell)
-        display_grid.append(new_row)
 
-    for (x, y) in path:
-        if display_grid[x][y] == "_":
-            display_grid[x][y] = "P"
-    
-    for row in display_grid:
-        print(" ".join(row))
-    print("\n")
+def ids_algorithm(grid, start, goal):
+    depth = 0
+    start_time = time.time()
+    while True:
+        print(f"\nTrying depth limit: {depth}")
+        path = depth_limited_search(grid, start, goal, depth)
+
+        if path:
+            end_time = time.time()
+            total_time = end_time - start_time
+            total_cost = calculate_cost(path)
+            print("\nPath to goal found:")
+            print_final_path(grid, path)
+            print("Path taken: ", path)
+            print(f"time taken for the ids algorithm to search for the goal is: {total_time} seconds")
+            print(f"the cost is : {total_cost}")
+            return path, total_time, total_cost
+
+        depth += 1
+
+
+        

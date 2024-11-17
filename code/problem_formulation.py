@@ -4,21 +4,27 @@ from collections import deque
 grid_size = 5
 initial_state = (0, 0)
 goal_state = (4,4)
-num_of_obstacle = 5  
+num_of_obstacle = 6  
 
 def create_grid():
+    
     grid = []
+    
     for _ in range(grid_size):
         row = []
         for _ in range(grid_size):
             row.append("_")
         grid.append(row)
-    grid[0][0] = "S"  # Start
-    grid[4][4] = "G"        # Goal
+        
+    grid[0][0] = "S" 
+    grid[grid_size-1][grid_size-1] = "G"
+           
     return grid
 
 def place_obstacles(grid):
+    
     obstacles = 0
+    
     while obstacles < num_of_obstacle:
         x = random.randint(0, grid_size - 1)
         y = random.randint(0, grid_size - 1)
@@ -27,7 +33,10 @@ def place_obstacles(grid):
             grid[x][y] = "X"
             obstacles += 1
 
-# Check if there is a path from start to goal using BFS
+
+
+
+
 def has_path(grid):
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     queue = deque([initial_state])
@@ -48,7 +57,10 @@ def has_path(grid):
                     queue.append((next_x, next_y))
     return False
 
-# Print the grid with obstacles and path markings
+
+
+
+
 def print_grid_with_path(grid, path=[]):
     symbols = {"_": "_", "X": "X", "S": "S", "G": "G"}
     display_grid = []
@@ -64,9 +76,10 @@ def print_grid_with_path(grid, path=[]):
     
     for row in display_grid:
         print(" ".join(row))
-    print()
+    print("\n")
 
-# Generate a valid grid with obstacles and ensure path existence
+
+
 def generate_valid_grid():
     while True:
         grid = create_grid()
@@ -74,3 +87,26 @@ def generate_valid_grid():
         
         if has_path(grid):
             return grid
+
+def calculate_cost(path):
+    return len(path)-1
+
+        
+       
+        
+def print_final_path(grid, path):
+    display_grid = []
+    for row in grid:
+        new_row = []
+        
+        for cell in row:
+            new_row.append(cell)
+        display_grid.append(new_row)
+
+    for (x, y) in path:
+        if display_grid[x][y] == "_":
+            display_grid[x][y] = "P"
+    
+    for row in display_grid:
+        print(" ".join(row))
+    print("\n")
