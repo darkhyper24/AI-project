@@ -2,6 +2,7 @@ from tabulate import tabulate
 from greedy_best_euclidean import greedy_best_first_euclidean_algorithm
 from greedy_best_manhattan import greedy_best_first_manhattan_algorithm
 from AStar import AStar_algorithm
+from AStarEuclidean import AStar_algorithm_Euclidean
 from bfs import bfs_algorithm
 from ids import ids_algorithm
 from ucs import ucs_algorithm
@@ -28,6 +29,9 @@ greedy_best_first_manhattan_performance = (path,total_time, total_cost)
 path, total_time, total_cost = AStar_algorithm(grid)
 AStar_performance = (path,total_time, total_cost)
 
+path, total_time, total_cost = AStar_algorithm_Euclidean(grid)
+AStar_performance_Euclidean = (path,total_time, total_cost)
+
 path, total_time, total_cost = ucs_algorithm(grid)
 ucs_performance = (path,total_time, total_cost)
 
@@ -40,7 +44,7 @@ dfs_performance=(path,total_time,total_cost)
 path, total_time,total_cost=hill_climbing_algorithm(grid,initial_state,goal_state)
 hill_climbing_performance=(path,total_time,total_cost)
 
-all_performances = [bfs_performance,dfs_performance, ids_performance,ucs_performance,greedy_best_first_euclidean_performance, greedy_best_first_manhattan_performance, AStar_performance ,hill_climbing_performance, SA_performance]
+all_performances = [bfs_performance,dfs_performance, ids_performance,ucs_performance,greedy_best_first_euclidean_performance, greedy_best_first_manhattan_performance, AStar_performance , AStar_performance_Euclidean, hill_climbing_performance, SA_performance]
 def print_all_performances(all_performances):
     headers = ["Algorithm", "Path Taken", "Time Taken (s)", "Total Cost"]
     table_data = []
@@ -52,6 +56,7 @@ def print_all_performances(all_performances):
         "Greedy Best First (Euclidean)",
         "Greedy Best First (Manhattan)",
         "A* Search",
+        "A* Search (Euclidean)",
         "hill climbing search",
         "Simulated Annealing"
     ]
