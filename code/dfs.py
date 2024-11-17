@@ -1,6 +1,6 @@
 from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path, calculate_cost, print_final_path
 import time
-
+from visualisation import visualize_grid_path
 
 def dfs(grid, start, goal):
     stack = [(start, [])]  
@@ -46,5 +46,6 @@ def dfs_algorithm(grid, start, goal):
         print("Path taken:", path)
         print(f"time taken for the dfs algorithm to search for the goal is: {total_time} seconds")
         print(f"the cost is: {total_cost}")
+        visualize_grid_path(grid, path, initial_state, goal_state, "DFS")
         return path, total_time, total_cost
 

@@ -2,8 +2,7 @@ import math
 import random
 import time
 from problem_formulation import initial_state, goal_state, print_grid_with_path,calculate_cost,print_final_path
-
-
+from visualisation import visualize_grid_path
 
 def get_neighbors(grid, state):
 
@@ -19,14 +18,8 @@ def get_neighbors(grid, state):
     return neighbors
 
 
-
-
 def calculate_cost(path):
-
     return len(path)
-
-
-
 
 def simplify_path(path):
 
@@ -35,9 +28,6 @@ def simplify_path(path):
         if state not in optimized_path:
             optimized_path.append(state)
     return optimized_path
-
-
-
 
 def simulated_annealing(grid, max_steps=1000, initial_temperature=100, cooling_rate=0.95):
     current_state = initial_state
@@ -94,9 +84,6 @@ def simulated_annealing(grid, max_steps=1000, initial_temperature=100, cooling_r
         print_grid_with_path(grid,path)
         return None
 
-
-
-
 def SA_algorithm(grid):
     start_time=time.time()
     path = simulated_annealing(grid)
@@ -106,6 +93,7 @@ def SA_algorithm(grid):
         total_cost = calculate_cost(path)
         print(f"time taken for simulated annealing to find path: {total_time} seconds\n")
         print(f"the path cost is : {total_cost}\n")
+        visualize_grid_path(grid, path, initial_state, goal_state, "Simulated Annealing")
         return path, total_time, total_cost
     
     else:

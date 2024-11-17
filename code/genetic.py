@@ -1,5 +1,6 @@
 import random, time
 from problem_formulation import grid_size, initial_state, goal_state, print_grid_with_path,print_final_path
+from visualisation import visualize_grid_path
 
 
 def manhattan_distance(state1, state2):
@@ -134,6 +135,7 @@ def Gen_algorithm(grid):
         total_cost = calculate_cost(path)
         print(f"time taken for Genetic to find path: {total_time} seconds\n")
         print(f"the path cost is : {total_cost}\n")
+        visualize_grid_path(grid, path, initial_state, goal_state, "Genetic")
         return path, total_time, total_cost
     else:
         print(f"time taken for Genetic without finding path: {total_time} seconds\n")
