@@ -11,6 +11,8 @@ from hill_climbing import hill_climbing_algorithm
 from simulated_annealing import SA_algorithm
 from genetic import Gen_algorithm
 from problem_formulation import generate_valid_grid,initial_state,goal_state,print_grid_with_path,calculate_cost,print_final_path
+from visualisation import visualize_grid_path
+
 grid = generate_valid_grid()
 
 print("Generated 5x5 grid with 5 obstacles:")
@@ -60,7 +62,7 @@ def print_all_performances(all_performances):
         "Uniform Cost Search (UCS)",
         "Greedy Best First (Euclidean)",
         "Greedy Best First (Manhattan)",
-        "A* Search",
+        "A* Search (Manhattan)",
         "A* Search (Euclidean)",
         "hill climbing search",
         "Simulated Annealing",

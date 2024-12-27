@@ -65,5 +65,5 @@ def AStar_algorithm(grid):
             print("Path taken:", path)
             print(f"time taken for the A* algorithm to search for the goal is:{total_time} seconds")
             print(f"the cost is : {total_cost}")
-            visualize_grid_path(grid, path, initial_state, goal_state, "A*")
+            visualize_grid_path(grid, path, initial_state, goal_state, "A* manhattan")
             return path, total_time, total_cost

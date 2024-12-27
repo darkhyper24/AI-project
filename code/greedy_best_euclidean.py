@@ -2,8 +2,6 @@ from problem_formulation import grid_size, initial_state, goal_state, print_grid
 import time
 import heapq
 import math
-from matplotlib import pyplot as plt
-import matplotlib.pyplot as plt
 import numpy as np
 from visualisation import visualize_grid_path
 

@@ -57,5 +57,5 @@ def greedy_best_first_manhattan_algorithm(grid, start, goal):
             print("Path taken:", path)
             print(f"time taken for the greedy best first search algorithm to search for the goal is:{total_time} seconds")
             print(f"the cost is : {total_cost}")
-            visualize_grid_path(grid, path, initial_state, goal, "Greedy Best First")
+            visualize_grid_path(grid, path, initial_state, goal, "Greedy Best First manhattan")
             return path, total_time, total_cost
