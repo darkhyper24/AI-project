@@ -4,6 +4,7 @@ from greedy_best_manhattan import greedy_best_first_manhattan_algorithm
 from AStar import AStar_algorithm
 from AStarEuclidean import AStar_algorithm_Euclidean
 from bfs import bfs_algorithm
+from q_learning_algorithm import q_learning_algorithm
 from ids import ids_algorithm
 from ucs import ucs_algorithm
 from dfs import dfs_algorithm
@@ -14,6 +15,7 @@ from problem_formulation import generate_valid_grid,initial_state,goal_state,pri
 from visualisation import visualize_grid_path
 
 grid = generate_valid_grid()
+
 
 print("Generated 5x5 grid with 5 obstacles:")
 
@@ -51,7 +53,10 @@ hill_climbing_performance=(path,total_time,total_cost)
 path, total_time, total_cost = Gen_algorithm(grid)
 Gen_performance = (path,total_time,total_cost)
 
-all_performances = [bfs_performance,dfs_performance, ids_performance,ucs_performance,greedy_best_first_euclidean_performance, greedy_best_first_manhattan_performance, AStar_performance , AStar_performance_Euclidean, hill_climbing_performance, SA_performance, Gen_performance]
+path, total_time, total_cost = q_learning_algorithm(grid)
+q_learning_performance = (path, total_time, total_cost)
+
+all_performances = [bfs_performance,dfs_performance, ids_performance,ucs_performance,greedy_best_first_euclidean_performance, greedy_best_first_manhattan_performance, AStar_performance , AStar_performance_Euclidean, hill_climbing_performance, SA_performance, Gen_performance, q_learning_performance]
 def print_all_performances(all_performances):
     headers = ["Algorithm", "Path Taken", "Time Taken (s)", "Total Cost"]
     table_data = []
@@ -66,7 +71,8 @@ def print_all_performances(all_performances):
         "A* Search (Euclidean)",
         "hill climbing search",
         "Simulated Annealing",
-        "Genetic Algorithm"
+        "Genetic Algorithm",
+        "Q-Learning"
     ]
     
     for i, performance in enumerate(all_performances):
